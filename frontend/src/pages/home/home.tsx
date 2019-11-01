@@ -10,7 +10,7 @@ const HomePage: FunctionComponent = () => (
       .NET Core im Backend.
     </p>
     <p className="lead">
-      <a className="btn btn-primary btn-lg" href="#" role="button">
+      <a className="btn btn-primary btn-lg" href="/" role="button">
         Zur Kundenliste
       </a>
     </p>
