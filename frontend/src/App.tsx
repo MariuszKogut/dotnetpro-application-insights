@@ -2,24 +2,20 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./shared/compnents/header";
 import Footer from "./shared/compnents/footer";
-import { Router, View } from "react-navi";
-import { mount, route } from "navi";
 import HomePage from "./pages/home/home";
-
-const routes = mount({
-  "/": route({
-    title: "Home",
-    view: <HomePage />
-  })
-});
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 const App: React.FC = () => {
   return (
-    <Router routes={routes}>
+    <BrowserRouter>
       <Header />
-      <View />
+      <Switch>
+        <Route path="/" exact={true}>
+          <HomePage />
+        </Route>
+      </Switch>
       <Footer />
-    </Router>
+    </BrowserRouter>
   );
 };
 

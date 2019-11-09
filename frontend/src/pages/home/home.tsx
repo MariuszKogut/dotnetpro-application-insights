@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 
 const HomePage: FunctionComponent = () => (
   <div className="jumbotron">
@@ -10,9 +11,9 @@ const HomePage: FunctionComponent = () => (
       .NET Core im Backend.
     </p>
     <p className="lead">
-      <a className="btn btn-primary btn-lg" href="/" role="button">
+      <Link to="/customer/list" className="btn btn-primary btn-lg">
         Zur Kundenliste
-      </a>
+      </Link>
     </p>
   </div>
 );
