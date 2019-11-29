@@ -21,6 +21,8 @@ namespace HS.CustomerApp.Host
         {
             services.AddControllers();
             services.AddSingleton<ICustomerService, CustomerService>();
+
+            services.AddOpenApiDocument(c => c.Title = "CustomerApp REST-API");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,15 +34,16 @@ namespace HS.CustomerApp.Host
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+            app.UseReDoc();
         }
     }
 }
