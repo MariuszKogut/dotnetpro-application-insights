@@ -4,6 +4,7 @@ import Header from "./shared/components/header";
 import Footer from "./shared/components/footer";
 import HomePage from "./pages/home/home";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import CustomerListPage from "./pages/customer-list/page";
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,9 @@ const App: React.FC = () => {
       <Switch>
         <Route path="/" exact={true}>
           <HomePage />
+        </Route>
+        <Route path="/customer/list" exact={true}>
+          <CustomerListPage />
         </Route>
       </Switch>
       <Footer />
