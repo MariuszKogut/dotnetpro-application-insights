@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect, useMemo, useState } from "react";
 import { CustomerClient, ICustomerModel } from "../services/customer-client";
 import { LoadingState } from "./loading-state";
+import CustomerCard from "./customer-card";
 
 const CustomerList: FunctionComponent = () => {
   const [loadingState, setLoadingState] = useState<LoadingState>(
@@ -52,14 +53,14 @@ const CustomerList: FunctionComponent = () => {
 
     case LoadingState.HasData:
       return (
-        <ul>
+        <div className="row">
           {data &&
             data.map(x => (
-              <li key={x.id}>
-                {x.id}, {x.name}, {x.location}
-              </li>
+              <div className="col-3 py-3">
+                <CustomerCard key={x.id} customer={x} />
+              </div>
             ))}
-        </ul>
+        </div>
       );
   }
 };
