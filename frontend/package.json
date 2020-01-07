@@ -17,6 +17,7 @@
     "@types/react": "16.9.17",
     "@types/react-dom": "16.9.4",
     "@types/react-router-dom": "^5.1.3",
+    "nswag": "^13.2.0",
     "concurrently": "^5.0.2",
     "prettier": "^1.19.1"
   },
@@ -26,6 +27,7 @@
     "start:all": "concurrently \"npm run start\" \"npm run start:server\"",
     "build": "react-scripts build",
     "build:strict": "cross-env ci=true react-scripts build",
+    "generate:client": "nswag run ../backend/openapi.nswag /runtime:NetCore30",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
