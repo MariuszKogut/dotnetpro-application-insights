@@ -55,8 +55,8 @@ const CustomerList: FunctionComponent = () => {
       return (
         <div className="row">
           {data &&
-            data.map(x => (
-              <div className="col-3 py-3">
+              data.map(x => (
+              <div className="col-md-3 py-3">
                 <CustomerCard key={x.id} customer={x} />
               </div>
             ))}
