@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import CustomerList from "../../shared/components/customer-list";
+import { Link } from "react-router-dom";
 
 const CustomerListPage: FunctionComponent = () => (
   <div className="container">
@@ -8,6 +9,9 @@ const CustomerListPage: FunctionComponent = () => (
         <h1 className="pb-3">Kundenliste</h1>
         <CustomerList />
       </div>
+    </div>
+    <div className="row">
+      <CustomerList />
     </div>
   </div>
 );

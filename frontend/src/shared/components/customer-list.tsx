@@ -36,15 +36,19 @@ const CustomerList: FunctionComponent = () => {
   switch (loadingState) {
     case LoadingState.Loading:
       return (
-        <div className="spinner-border" role="status">
-          <span className="sr-only">Daten werden geladen...</span>
+        <div className="col-12">
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Daten werden geladen...</span>
+          </div>
         </div>
       );
 
     case LoadingState.Error:
       return (
-        <div className="alert alert-danger" role="alert">
-          Es ist ein Fehler aufgetreten: {error}
+        <div className="col-12">
+          <div className="alert alert-danger" role="alert">
+            Es ist ein Fehler aufgetreten: {error}
+          </div>
         </div>
       );
 
@@ -53,14 +57,14 @@ const CustomerList: FunctionComponent = () => {
 
     case LoadingState.HasData:
       return (
-        <div className="row">
+        <>
           {data &&
-              data.map(x => (
-              <div className="col-md-3 py-3">
-                <CustomerCard key={x.id} customer={x} />
+            data.map(x => (
+              <div className="col-md-3 py-3" key={x.id}>
+                <CustomerCard customer={x} />
               </div>
             ))}
-        </div>
+        </>
       );
   }
 };
