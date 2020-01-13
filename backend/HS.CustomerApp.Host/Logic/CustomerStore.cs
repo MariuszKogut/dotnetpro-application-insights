@@ -27,7 +27,11 @@ namespace HS.CustomerApp.Host.Logic
             SeedSampleData();
         }
 
-        public void Create(CustomerModel customerModel) => _data.Add(customerModel);
+        public void Create(CustomerModel customerModel)
+        {
+            customerModel.Id = _data.Max(x => x.Id) + 1;
+            _data.Add(customerModel);
+        }
 
         public IEnumerable<CustomerModel> ReadAll() => _data;
 

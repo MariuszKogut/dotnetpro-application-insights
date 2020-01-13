@@ -10,7 +10,7 @@ namespace HS.CustomerApp.Host
     public class Startup
     {
         readonly string CorsPolicyName = "CorsPolicy";
-        
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,10 +27,13 @@ namespace HS.CustomerApp.Host
                 options.AddPolicy(CorsPolicyName,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:3000");
+                        builder
+                            .WithOrigins("http://localhost:3000")
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
                     });
             });
-            
+
             services.AddSingleton<ICustomerService, CustomerService>();
 
             services.AddOpenApiDocument(c => c.Title = "CustomerApp REST-API");
@@ -48,11 +51,8 @@ namespace HS.CustomerApp.Host
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-            
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
             app.UseOpenApi();
             app.UseSwaggerUi3();
             app.UseReDoc();
