@@ -5,6 +5,7 @@ import Footer from "./shared/components/footer";
 import HomePage from "./pages/home/home";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import CustomerListPage from "./pages/customer-list/page";
+import CustomerDetailsPage from "./pages/customer-details/page";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,9 @@ const App: React.FC = () => {
         </Route>
         <Route path="/customer/list" exact={true}>
           <CustomerListPage />
+        </Route>
+        <Route path="/customer/new" exact={true}>
+          <CustomerDetailsPage />
         </Route>
       </Switch>
       <Footer />
