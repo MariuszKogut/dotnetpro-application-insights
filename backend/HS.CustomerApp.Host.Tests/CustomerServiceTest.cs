@@ -59,17 +59,18 @@ namespace HS.CustomerApp.Host.Tests
             var sut = new CustomerService();
             var customer = new CustomerModel
             {
-                Id = 4711,
                 Name = "Facebook",
                 Location = "USA"
             };
 
             // Act
-            sut.Create(customer);
+            var id = sut.Create(customer);
 
             // Assert
-            var item = sut.Read(4711);
-            item.Should().Be(customer);
+            var item = sut.Read(id);
+            item.Id.Should().Be(id);
+            item.Name.Should().Be(customer.Name);
+            item.Location.Should().Be(customer.Location);
         }
 
         [Fact]
@@ -79,23 +80,22 @@ namespace HS.CustomerApp.Host.Tests
             var sut = new CustomerService();
             var customer = new CustomerModel
             {
-                Id = 4711,
                 Name = "Facebook",
                 Location = "USA"
             };
-            sut.Create(customer);
+            var id = sut.Create(customer);
 
             // Act
             var updatedCustomer = new CustomerModel
             {
-                Id = 4711,
+                Id = id,
                 Name = "Facebook Inc",
                 Location = "Menlo Park, California, USA"
             };
             sut.Update(updatedCustomer);
 
             // Assert
-            var item = sut.Read(4711);
+            var item = sut.Read(id);
             item.Should().Be(updatedCustomer);
         }
     }

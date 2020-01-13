@@ -5,7 +5,7 @@ namespace HS.CustomerApp.Host.Logic
 {
     public interface ICustomerService
     {
-        void Create(CustomerModel customerModel);
+        long Create(CustomerModel customerModel);
         IEnumerable<CustomerModel> ReadAll();
         CustomerModel Read(long id);
         void Update(CustomerModel customerModel);
