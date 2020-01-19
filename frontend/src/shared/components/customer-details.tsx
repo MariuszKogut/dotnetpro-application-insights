@@ -59,10 +59,7 @@ const CustomerDetails: FunctionComponent = () => {
     <>
       <h1 className="pb-3">Kunde {name} hinzufügen</h1>
       <hr />
-      <button
-        className="btn btn-primary btn-lg mr-3"
-        onCplick={handleSaveClick}
-      >
+      <button className="btn btn-primary btn-lg mr-3" onClick={handleSaveClick}>
         Speichern
       </button>
       <button className="btn btn-secondary btn-lg" onClick={handleBackClick}>
