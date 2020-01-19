@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using HS.CustomerApp.Host.Logic;
 using HS.CustomerApp.Host.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HS.CustomerApp.Host.Controllers
@@ -24,12 +25,21 @@ namespace HS.CustomerApp.Host.Controllers
         public CustomerModel Get(long id) => _customerService.Read(id);
 
         [HttpPost]
-        public void Insert(CustomerModel customerModel) => _customerService.Create(customerModel);
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType( typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public IActionResult Insert(CustomerModel customerModel) => Ok(_customerService.Create(customerModel));
 
         [HttpPut]
-        public void Update(CustomerModel customerModel) => _customerService.Update(customerModel);
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType( typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public IActionResult Update(CustomerModel customerModel)
+        {
+            _customerService.Update(customerModel);
+            return Ok();
+        }
 
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public void Delete(long id) => _customerService.Delete(id);
     }
 }

@@ -1,4 +1,7 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using HS.CustomerApp.Host.Logic;
+using HS.CustomerApp.Host.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +24,7 @@ namespace HS.CustomerApp.Host
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation();
             services.AddCors(options =>
             {
                 options.AddPolicy(CorsPolicyName,
@@ -35,6 +38,7 @@ namespace HS.CustomerApp.Host
             });
 
             services.AddSingleton<ICustomerService, CustomerService>();
+            services.AddTransient<IValidator<CustomerModel>, CustomerValidator>();
 
             services.AddOpenApiDocument(c => c.Title = "CustomerApp REST-API");
         }
