@@ -16,7 +16,7 @@ import {
 import ProblemDetails, { hasErrors } from "./problem-details";
 
 interface Props {
-  id: number | undefined;
+  id?: number;
 }
 
 const CustomerDetails: FunctionComponent<Props> = props => {

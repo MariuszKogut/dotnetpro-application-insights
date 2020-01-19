@@ -42,6 +42,7 @@ const CustomerList: FunctionComponent = () => {
       setError(e);
     }
   };
+
   switch (loadingState) {
     case LoadingState.Loading:
       return (
