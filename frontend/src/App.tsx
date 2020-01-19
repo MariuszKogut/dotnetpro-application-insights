@@ -21,6 +21,9 @@ const App: React.FC = () => {
         <Route path="/customer/new" exact={true}>
           <CustomerDetailsPage />
         </Route>
+        <Route path="/customer/editor/:id" exact={true}>
+          <CustomerDetailsPage />
+        </Route>
       </Switch>
       <Footer />
     </BrowserRouter>

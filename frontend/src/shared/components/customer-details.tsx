@@ -1,4 +1,11 @@
-import React, { FormEvent, FunctionComponent, useMemo, useState } from "react";
+import React, {
+  FormEvent,
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState
+} from "react";
 import classNames from "classnames";
 import { useHistory } from "react-router-dom";
 import {
@@ -8,11 +15,19 @@ import {
 } from "../services/customer-client";
 import ProblemDetails, { hasErrors } from "./problem-details";
 
-const CustomerDetails: FunctionComponent = () => {
+interface Props {
+  id: number | undefined;
+}
+
+const CustomerDetails: FunctionComponent<Props> = props => {
+  const { id } = props;
+  const isInsertMode = id === undefined;
+
   const history = useHistory();
 
   const [customer, setCustomer] = useState<CustomerModel>(() => {
     const customer = new CustomerModel();
+    customer.id = isInsertMode ? undefined : id;
     customer.name = "";
     customer.location = "";
     return customer;
@@ -29,10 +44,27 @@ const CustomerDetails: FunctionComponent = () => {
     []
   );
 
+  const loadCustomer = useCallback(async () => {
+    if (id && id > 0) {
+      try {
+        const customer = await customerClient.get(id);
+        setCustomer(customer);
+      } catch (e) {
+        setError(e.message);
+      }
+    }
+  }, [id, customerClient]);
+
+  useEffect(() => {
+    loadCustomer();
+  }, [loadCustomer]);
+
   const handleBackClick = () => history.goBack();
   const handleSaveClick = async () => {
     try {
-      await customerClient.insert(customer);
+      isInsertMode
+        ? await customerClient.insert(customer)
+        : await customerClient.update(customer);
       history.push("/customer/list");
     } catch (e) {
       if (e instanceof ValidationProblemDetails) {
