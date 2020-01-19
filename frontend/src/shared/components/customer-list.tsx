@@ -9,6 +9,7 @@ const CustomerList: FunctionComponent = () => {
   );
   const [data, setData] = useState<ICustomerModel[]>();
   const [error, setError] = useState<string>();
+  const [deletedItems, setDeletedItems] = useState(0);
 
   const customerClient = useMemo<CustomerClient>(
     () => new CustomerClient("https://localhost:5001"),
@@ -31,8 +32,16 @@ const CustomerList: FunctionComponent = () => {
     };
 
     loadCustomer();
-  }, [customerClient]);
+  }, [customerClient, deletedItems]);
 
+  const handleDeleteCustomer = async (id: number) => {
+    try {
+      await customerClient.delete(id);
+      setDeletedItems(deletedItems + 1);
+    } catch (e) {
+      setError(e);
+    }
+  };
   switch (loadingState) {
     case LoadingState.Loading:
       return (
@@ -61,7 +70,7 @@ const CustomerList: FunctionComponent = () => {
           {data &&
             data.map(x => (
               <div className="col-md-3 py-3" key={x.id}>
-                <CustomerCard customer={x} />
+                <CustomerCard customer={x} onDelete={handleDeleteCustomer} />
               </div>
             ))}
         </>

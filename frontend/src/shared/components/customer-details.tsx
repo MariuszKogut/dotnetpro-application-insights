@@ -75,7 +75,7 @@ const CustomerDetails: FunctionComponent = () => {
 
       <form>
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="Name">Name</label>
           <input
             type="text"
             className={classNames("form-control", {

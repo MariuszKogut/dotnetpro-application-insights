@@ -4,17 +4,12 @@ import { ValidationProblemDetails } from "../services/customer-client";
 export const hasErrors = (
   fieldName: string,
   problemDetails?: ValidationProblemDetails
-) => {
-  if (
-    problemDetails &&
-    problemDetails.errors &&
-    problemDetails.errors.hasOwnProperty(fieldName)
-  ) {
-    return problemDetails.errors[fieldName];
-  }
-
-  return [];
-};
+) =>
+  problemDetails &&
+  problemDetails.errors &&
+  problemDetails.errors.hasOwnProperty(fieldName)
+    ? problemDetails.errors[fieldName]
+    : [];
 
 interface Props {
   fieldName: string;

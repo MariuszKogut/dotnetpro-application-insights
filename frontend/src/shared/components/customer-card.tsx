@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 
 interface Props {
   customer: ICustomerModel;
+  onDelete: (id: number) => void;
 }
 
 const CustomerCard: FunctionComponent<Props> = props => {
   const {
-    customer: { name, id, location }
+    customer: { name, id, location },
+    onDelete
   } = props;
 
   return (
@@ -22,8 +24,18 @@ const CustomerCard: FunctionComponent<Props> = props => {
           <span className="text-muted">Location</span> {location}
         </li>
       </ul>
-      <div className="card-body">
-        <Link to={`/customer/editor/${id}`}>Öffnen</Link>
+      <div className="card-body d-flex">
+        <Link className="btn btn-secondary" to={`/customer/editor/${id}`}>
+          Öffnen
+        </Link>
+        {id && (
+          <button
+            className="btn btn-danger ml-auto"
+            onClick={() => onDelete(id)}
+          >
+            Löschen
+          </button>
+        )}
       </div>
     </div>
   );
