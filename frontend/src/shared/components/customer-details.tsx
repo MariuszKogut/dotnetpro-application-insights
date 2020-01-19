@@ -1,6 +1,12 @@
 import React, { FormEvent, FunctionComponent, useMemo, useState } from "react";
+import classNames from "classnames";
 import { useHistory } from "react-router-dom";
-import { CustomerClient, CustomerModel } from "../services/customer-client";
+import {
+  CustomerClient,
+  CustomerModel,
+  ValidationProblemDetails
+} from "../services/customer-client";
+import ProblemDetails, { hasErrors } from "./problem-details";
 
 const CustomerDetails: FunctionComponent = () => {
   const history = useHistory();
@@ -14,6 +20,9 @@ const CustomerDetails: FunctionComponent = () => {
   const { name, location } = customer;
 
   const [error, setError] = useState<string>();
+  const [problemDetails, setProblemDetails] = useState<
+    ValidationProblemDetails
+  >();
 
   const customerClient = useMemo<CustomerClient>(
     () => new CustomerClient("https://localhost:5001"),
@@ -26,7 +35,11 @@ const CustomerDetails: FunctionComponent = () => {
       await customerClient.insert(customer);
       history.push("/customer/list");
     } catch (e) {
-      setError(e.message);
+      if (e instanceof ValidationProblemDetails) {
+        setProblemDetails(e);
+      } else {
+        setError(e.message);
+      }
     }
   };
 
@@ -46,7 +59,10 @@ const CustomerDetails: FunctionComponent = () => {
     <>
       <h1 className="pb-3">Kunde {name} hinzufügen</h1>
       <hr />
-      <button className="btn btn-primary btn-lg mr-3" onClick={handleSaveClick}>
+      <button
+        className="btn btn-primary btn-lg mr-3"
+        onCplick={handleSaveClick}
+      >
         Speichern
       </button>
       <button className="btn btn-secondary btn-lg" onClick={handleBackClick}>
@@ -65,29 +81,38 @@ const CustomerDetails: FunctionComponent = () => {
           <label htmlFor="name">Name</label>
           <input
             type="text"
-            className="form-control"
-            id="name"
-            aria-describedby="nameHelp"
+            className={classNames("form-control", {
+              "is-invalid": hasErrors("Name", problemDetails).length > 0
+            })}
+            id="Name"
+            aria-describedby="NameHelp"
             value={name}
             onChange={handleNameChanged}
           />
-          <small id="nameHelp" className="form-text text-muted">
+          <small id="NameHelp" className="form-text text-muted">
             Name des Unternehmens, z. B. Microsoft
           </small>
+          <ProblemDetails fieldName="Name" problemDetails={problemDetails} />
         </div>
         <div className="form-group">
-          <label htmlFor="location">Location</label>
+          <label htmlFor="Location">Location</label>
           <input
             type="text"
-            className="form-control"
-            id="location"
-            aria-describedby="locationHelp"
+            className={classNames("form-control", {
+              "is-invalid": hasErrors("Location", problemDetails).length > 0
+            })}
+            id="Location"
+            aria-describedby="LocationHelp"
             value={location}
             onChange={handleLocationChanged}
           />
-          <small id="locationHelp" className="form-text text-muted">
+          <small id="LocationHelp" className="form-text text-muted">
             Sitz des Unternehmens, z. B. USA
           </small>
+          <ProblemDetails
+            fieldName="Location"
+            problemDetails={problemDetails}
+          />
         </div>
       </form>
     </>
