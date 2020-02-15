@@ -25,8 +25,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:server": "cd ../backend/HS.CustomerApp.Host && dotnet run",
-    "start:all": "concurrently \"npm run start\" \"npm run start:server\"",
+    "start:customer-backend": "cd ../backend/HS.CustomerApp.CustomerHost && dotnet run",
+    "start:id-backend": "cd ../backend/HS.CustomerApp.IdHost && dotnet run",
+    "start:all": "concurrently \"npm run start\" \"npm run start:customer-backend\" \"npm run start:id-backend\"",
     "build": "react-scripts build",
     "build:strict": "cross-env ci=true react-scripts build",
     "generate:client": "nswag run ../backend/openapi.nswag /runtime:NetCore30",
