@@ -16,7 +16,13 @@ namespace HS.CustomerApp.HostConfiguration
                 throw new ArgumentNullException(nameof(instrumentationKey));
             }
 
-            services.AddApplicationInsightsTelemetry(instrumentationKey);
+            services.AddApplicationInsightsTelemetry(o =>
+            {
+                o.InstrumentationKey = instrumentationKey;
+                o.DeveloperMode = false;
+                o.RequestCollectionOptions.EnableW3CDistributedTracing = false;
+                o.RequestCollectionOptions.InjectResponseHeaders = true;
+            });
 
             services.AddSingleton<ITelemetryInitializer>(new RoleNameInitializer(roleName, roleNameInstance));
         }

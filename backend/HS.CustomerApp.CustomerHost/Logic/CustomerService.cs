@@ -3,12 +3,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using HS.CustomerApp.CustomerHost.Models;
 using HS.CustomerApp.IdClient;
+using Microsoft.Extensions.Logging;
 
 namespace HS.CustomerApp.CustomerHost.Logic
 {
     public class CustomerService : ICustomerService
     {
         private readonly IIdClient _idClient;
+        private readonly ILogger<CustomerService> _logger;
 
         private static readonly (string, string)[] Customers =
         {
@@ -26,9 +28,10 @@ namespace HS.CustomerApp.CustomerHost.Logic
 
         private readonly List<CustomerModel> _data = new List<CustomerModel>();
 
-        public CustomerService(IIdClient idClient)
+        public CustomerService(IIdClient idClient, ILogger<CustomerService> logger)
         {
             _idClient = idClient;
+            _logger = logger;
             SeedSampleData();
         }
 
@@ -47,7 +50,11 @@ namespace HS.CustomerApp.CustomerHost.Logic
         public void Update(CustomerModel customerModel) =>
             _data[_data.FindIndex(x => x.Id == customerModel.Id)] = customerModel;
 
-        public void Delete(long id) => _data.RemoveAll(x => x.Id == id);
+        public void Delete(long id)
+        {
+            _logger.LogInformation($"Delete customer with id {id}");
+            _data.RemoveAll(x => x.Id == id);
+        }
 
         private void SeedSampleData()
         {

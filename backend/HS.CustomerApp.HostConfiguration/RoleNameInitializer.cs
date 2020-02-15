@@ -15,11 +15,8 @@ namespace HS.CustomerApp.HostConfiguration
         }
         public void Initialize(ITelemetry telemetry)
         {
-            if (string.IsNullOrEmpty(telemetry.Context.Cloud.RoleName))
-            {
-                telemetry.Context.Cloud.RoleName = _roleName;
-                telemetry.Context.Cloud.RoleInstance = _roleInstance;
-            }
+            telemetry.Context.Cloud.RoleName = _roleName;
+            telemetry.Context.Cloud.RoleInstance = $"{_roleName}-{_roleInstance}";
         }
     }
 }
