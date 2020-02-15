@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace HS.CustomerApp.Host
+namespace HS.CustomerApp.CustomerHost
 {
     public class Program
     {
@@ -11,7 +11,7 @@ namespace HS.CustomerApp.Host
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
+            Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

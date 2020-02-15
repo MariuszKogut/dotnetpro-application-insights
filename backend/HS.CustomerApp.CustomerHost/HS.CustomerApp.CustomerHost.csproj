@@ -9,4 +9,8 @@
       <PackageReference Include="NSwag.AspNetCore" Version="13.2.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\HS.CustomerApp.IdClient\HS.CustomerApp.IdClient.csproj" />
+    </ItemGroup>
+
 </Project>

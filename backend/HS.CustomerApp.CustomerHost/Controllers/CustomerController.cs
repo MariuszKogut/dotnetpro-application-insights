@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
-using HS.CustomerApp.Host.Logic;
-using HS.CustomerApp.Host.Models;
+using System.Threading.Tasks;
+using HS.CustomerApp.CustomerHost.Logic;
+using HS.CustomerApp.CustomerHost.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HS.CustomerApp.Host.Controllers
+namespace HS.CustomerApp.CustomerHost.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -26,12 +27,16 @@ namespace HS.CustomerApp.Host.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType( typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        public IActionResult Insert(CustomerModel customerModel) => Ok(_customerService.Create(customerModel));
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Insert(CustomerModel customerModel)
+        {
+            var id = await _customerService.Create(customerModel);
+            return Ok(id);
+        }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType( typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public IActionResult Update(CustomerModel customerModel)
         {
             _customerService.Update(customerModel);

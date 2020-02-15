@@ -1,10 +1,11 @@
+using System.Threading.Tasks;
 using FluentAssertions;
-using HS.CustomerApp.Host.Logic;
-using HS.CustomerApp.Host.Models;
+using HS.CustomerApp.CustomerHost.Logic;
+using HS.CustomerApp.CustomerHost.Models;
 using Snapshooter.Xunit;
 using Xunit;
 
-namespace HS.CustomerApp.Host.Tests
+namespace HS.CustomerApp.CustomerHost.Tests
 {
     public class CustomerServiceTest
     {
@@ -53,7 +54,7 @@ namespace HS.CustomerApp.Host.Tests
         }
 
         [Fact]
-        public void ShouldAddCustomer()
+        public async Task ShouldAddCustomer()
         {
             // Arrange
             var sut = new CustomerService();
@@ -64,7 +65,7 @@ namespace HS.CustomerApp.Host.Tests
             };
 
             // Act
-            var id = sut.Create(customer);
+            var id = await sut.Create(customer);
 
             // Assert
             var item = sut.Read(id);
@@ -74,7 +75,7 @@ namespace HS.CustomerApp.Host.Tests
         }
 
         [Fact]
-        public void ShouldUpdateCustomer()
+        public async Task ShouldUpdateCustomer()
         {
             // Arrange
             var sut = new CustomerService();
@@ -83,7 +84,7 @@ namespace HS.CustomerApp.Host.Tests
                 Name = "Facebook",
                 Location = "USA"
             };
-            var id = sut.Create(customer);
+            var id = await sut.Create(customer);
 
             // Act
             var updatedCustomer = new CustomerModel

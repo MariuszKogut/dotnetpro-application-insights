@@ -1,11 +1,12 @@
 using System.Collections.Generic;
-using HS.CustomerApp.Host.Models;
+using System.Threading.Tasks;
+using HS.CustomerApp.CustomerHost.Models;
 
-namespace HS.CustomerApp.Host.Logic
+namespace HS.CustomerApp.CustomerHost.Logic
 {
     public interface ICustomerService
     {
-        long Create(CustomerModel customerModel);
+        Task<long> Create(CustomerModel customerModel);
         IEnumerable<CustomerModel> ReadAll();
         CustomerModel Read(long id);
         void Update(CustomerModel customerModel);

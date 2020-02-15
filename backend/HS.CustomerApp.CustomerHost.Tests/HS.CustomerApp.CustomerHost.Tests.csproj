@@ -3,8 +3,6 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <IsPackable>false</IsPackable>
-        <AssemblyName>HS.CustomerApp.Host.Tests</AssemblyName>
-        <RootNamespace>HS.CustomerApp.Host.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\HS.CustomerApp.Host\HS.CustomerApp.Host.csproj" />
+      <ProjectReference Include="..\HS.CustomerApp.CustomerHost\HS.CustomerApp.CustomerHost.csproj" />
     </ItemGroup>
 
 </Project>

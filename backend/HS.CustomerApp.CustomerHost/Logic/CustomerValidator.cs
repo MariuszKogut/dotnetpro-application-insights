@@ -1,7 +1,7 @@
 using FluentValidation;
-using HS.CustomerApp.Host.Models;
+using HS.CustomerApp.CustomerHost.Models;
 
-namespace HS.CustomerApp.Host.Logic
+namespace HS.CustomerApp.CustomerHost.Logic
 {
     public class CustomerValidator : AbstractValidator<CustomerModel>
     {

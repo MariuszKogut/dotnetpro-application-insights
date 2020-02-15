@@ -1,14 +1,14 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using HS.CustomerApp.Host.Logic;
-using HS.CustomerApp.Host.Models;
+using HS.CustomerApp.CustomerHost.Logic;
+using HS.CustomerApp.CustomerHost.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace HS.CustomerApp.Host
+namespace HS.CustomerApp.CustomerHost
 {
     public class Startup
     {
@@ -37,6 +37,7 @@ namespace HS.CustomerApp.Host
                     });
             });
 
+            services.AddHttpClient();
             services.AddSingleton<ICustomerService, CustomerService>();
             services.AddTransient<IValidator<CustomerModel>, CustomerValidator>();
 

@@ -1,4 +1,4 @@
-namespace HS.CustomerApp.Host.Models
+namespace HS.CustomerApp.CustomerHost.Models
 {
     public class CustomerModel
     {
