@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using HS.CustomerApp.CustomerHost.Models;
+using HS.CustomerApp.IdClient;
 
 namespace HS.CustomerApp.CustomerHost.Logic
 {
     public class CustomerService : ICustomerService
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IIdClient _idClient;
 
         private static readonly (string, string)[] Customers =
         {
@@ -26,16 +26,15 @@ namespace HS.CustomerApp.CustomerHost.Logic
 
         private readonly List<CustomerModel> _data = new List<CustomerModel>();
 
-        public CustomerService(IHttpClientFactory httpClientFactory)
+        public CustomerService(IIdClient idClient)
         {
-            _httpClientFactory = httpClientFactory;
+            _idClient = idClient;
             SeedSampleData();
         }
 
         public async Task<long> Create(CustomerModel customerModel)
         {
-            var idClient = new IdClient.IdClient(_httpClientFactory.CreateClient());
-            var id = await idClient.GenerateAsync();
+            var id = await _idClient.GenerateAsync();
             customerModel.Id = id;
             _data.Add(customerModel);
             return id;
@@ -56,7 +55,7 @@ namespace HS.CustomerApp.CustomerHost.Logic
                 Customers
                     .Select((x, i) => new CustomerModel
                     {
-                        Id = i,
+                        Id = i + 1,
                         Name = x.Item1,
                         Location = x.Item2
                     }));

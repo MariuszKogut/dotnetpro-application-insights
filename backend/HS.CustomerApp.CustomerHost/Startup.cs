@@ -1,8 +1,11 @@
+using System;
+using System.Net.Http;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using HS.CustomerApp.CustomerHost.Logic;
 using HS.CustomerApp.CustomerHost.Models;
 using HS.CustomerApp.HostConfiguration;
+using HS.CustomerApp.IdClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +28,7 @@ namespace HS.CustomerApp.CustomerHost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCustomizedApplicationInsightsTelemetry(Configuration);
+            services.AddCustomizedApplicationInsightsTelemetry(Configuration, "CustomerHost", Environment.MachineName);
             services.AddControllers().AddFluentValidation();
             services.AddCors(options =>
             {
@@ -42,6 +45,11 @@ namespace HS.CustomerApp.CustomerHost
             services.AddHttpClient();
             services.AddSingleton<ICustomerService, CustomerService>();
             services.AddTransient<IValidator<CustomerModel>, CustomerValidator>();
+            services.AddTransient<IIdClient>(provider =>
+            {
+                var httpClient = provider.GetService<IHttpClientFactory>().CreateClient();
+                return new IdClient.IdClient(httpClient);
+            });
 
             services.AddCustomizedSwagger();
         }

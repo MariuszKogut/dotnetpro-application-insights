@@ -1,3 +1,4 @@
+using System;
 using HS.CustomerApp.HostConfiguration;
 using HS.CustomerApp.IdHost.Logic;
 using Microsoft.AspNetCore.Builder;
@@ -20,7 +21,7 @@ namespace HS.CustomerApp.IdHost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCustomizedApplicationInsightsTelemetry(Configuration);
+            services.AddCustomizedApplicationInsightsTelemetry(Configuration, "IdHost", Environment.MachineName);
             services.AddControllers();
             services.AddSingleton<IIdService, IdService>();
 
