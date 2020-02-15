@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using HS.CustomerApp.CustomerHost.Logic;
 using HS.CustomerApp.CustomerHost.Models;
+using HS.CustomerApp.IdClient;
+using Moq;
 using Snapshooter.Xunit;
 using Xunit;
 
@@ -13,7 +15,7 @@ namespace HS.CustomerApp.CustomerHost.Tests
         public void ShouldReturnAllCustomers()
         {
             // Arrange
-            var sut = new CustomerService(new TestHttpClientFactory());
+            var sut = new CustomerService(GetIdClientMock().Object);
 
             // Act
             var result = sut.ReadAll();
@@ -29,7 +31,7 @@ namespace HS.CustomerApp.CustomerHost.Tests
         public void ShouldReturnSingleCustomer(long id, string expectedName)
         {
             // Arrange
-            var sut = new CustomerService(new TestHttpClientFactory());
+            var sut = new CustomerService(GetIdClientMock().Object);
 
             // Act
             var result = sut.Read(id);
@@ -43,7 +45,7 @@ namespace HS.CustomerApp.CustomerHost.Tests
         public void ShouldDeleteCustomer()
         {
             // Arrange
-            var sut = new CustomerService(new TestHttpClientFactory());
+            var sut = new CustomerService(GetIdClientMock().Object);
 
             // Act
             sut.Delete(1);
@@ -57,7 +59,7 @@ namespace HS.CustomerApp.CustomerHost.Tests
         public async Task ShouldAddCustomer()
         {
             // Arrange
-            var sut = new CustomerService(new TestHttpClientFactory());
+            var sut = new CustomerService(GetIdClientMock().Object);
             var customer = new CustomerModel
             {
                 Name = "Facebook",
@@ -78,7 +80,7 @@ namespace HS.CustomerApp.CustomerHost.Tests
         public async Task ShouldUpdateCustomer()
         {
             // Arrange
-            var sut = new CustomerService(new TestHttpClientFactory());
+            var sut = new CustomerService(GetIdClientMock().Object);
             var customer = new CustomerModel
             {
                 Name = "Facebook",
@@ -98,6 +100,13 @@ namespace HS.CustomerApp.CustomerHost.Tests
             // Assert
             var item = sut.Read(id);
             item.Should().Be(updatedCustomer);
+        }
+
+        private static Mock<IIdClient> GetIdClientMock()
+        {
+            var idClientMock = new Mock<IIdClient>();
+            idClientMock.Setup(x => x.GenerateAsync()).ReturnsAsync(4711);
+            return idClientMock;
         }
     }
 }
