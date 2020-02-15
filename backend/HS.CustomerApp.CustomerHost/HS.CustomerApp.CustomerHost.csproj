@@ -6,10 +6,10 @@
 
     <ItemGroup>
       <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.1" />
-      <PackageReference Include="NSwag.AspNetCore" Version="13.2.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\HS.CustomerApp.HostConfiguration\HS.CustomerApp.HostConfiguration.csproj" />
       <ProjectReference Include="..\HS.CustomerApp.IdClient\HS.CustomerApp.IdClient.csproj" />
     </ItemGroup>
 

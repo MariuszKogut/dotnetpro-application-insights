@@ -13,7 +13,7 @@ namespace HS.CustomerApp.CustomerHost.Tests
         public void ShouldReturnAllCustomers()
         {
             // Arrange
-            var sut = new CustomerService();
+            var sut = new CustomerService(new TestHttpClientFactory());
 
             // Act
             var result = sut.ReadAll();
@@ -29,7 +29,7 @@ namespace HS.CustomerApp.CustomerHost.Tests
         public void ShouldReturnSingleCustomer(long id, string expectedName)
         {
             // Arrange
-            var sut = new CustomerService();
+            var sut = new CustomerService(new TestHttpClientFactory());
 
             // Act
             var result = sut.Read(id);
@@ -43,7 +43,7 @@ namespace HS.CustomerApp.CustomerHost.Tests
         public void ShouldDeleteCustomer()
         {
             // Arrange
-            var sut = new CustomerService();
+            var sut = new CustomerService(new TestHttpClientFactory());
 
             // Act
             sut.Delete(1);
@@ -57,7 +57,7 @@ namespace HS.CustomerApp.CustomerHost.Tests
         public async Task ShouldAddCustomer()
         {
             // Arrange
-            var sut = new CustomerService();
+            var sut = new CustomerService(new TestHttpClientFactory());
             var customer = new CustomerModel
             {
                 Name = "Facebook",
@@ -78,7 +78,7 @@ namespace HS.CustomerApp.CustomerHost.Tests
         public async Task ShouldUpdateCustomer()
         {
             // Arrange
-            var sut = new CustomerService();
+            var sut = new CustomerService(new TestHttpClientFactory());
             var customer = new CustomerModel
             {
                 Name = "Facebook",

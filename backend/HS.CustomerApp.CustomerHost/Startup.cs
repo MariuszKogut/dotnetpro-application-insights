@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using HS.CustomerApp.CustomerHost.Logic;
 using HS.CustomerApp.CustomerHost.Models;
+using HS.CustomerApp.HostConfiguration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,7 @@ namespace HS.CustomerApp.CustomerHost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCustomizedApplicationInsightsTelemetry(Configuration);
             services.AddControllers().AddFluentValidation();
             services.AddCors(options =>
             {
@@ -41,7 +43,7 @@ namespace HS.CustomerApp.CustomerHost
             services.AddSingleton<ICustomerService, CustomerService>();
             services.AddTransient<IValidator<CustomerModel>, CustomerValidator>();
 
-            services.AddOpenApiDocument(c => c.Title = "CustomerApp REST-API");
+            services.AddCustomizedSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,9 +60,7 @@ namespace HS.CustomerApp.CustomerHost
             app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
-            app.UseReDoc();
+            app.UseCustomizedSwagger();
         }
     }
 }

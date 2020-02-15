@@ -1,3 +1,4 @@
+using HS.CustomerApp.HostConfiguration;
 using HS.CustomerApp.IdHost.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,10 +20,11 @@ namespace HS.CustomerApp.IdHost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCustomizedApplicationInsightsTelemetry(Configuration);
             services.AddControllers();
             services.AddSingleton<IIdService, IdService>();
 
-            services.AddOpenApiDocument(c => c.Title = "ID REST-API");
+            services.AddCustomizedSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,9 +40,7 @@ namespace HS.CustomerApp.IdHost
             app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
-            app.UseReDoc();
+            app.UseCustomizedSwagger();
         }
     }
 }

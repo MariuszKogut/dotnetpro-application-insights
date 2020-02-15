@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.CustomerApp.IdHost", "HS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.CustomerApp.IdClient", "HS.CustomerApp.IdClient\HS.CustomerApp.IdClient.csproj", "{3B7C3D50-05E0-4FB8-8BED-C4378B06EFAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.CustomerApp.HostConfiguration", "HS.CustomerApp.HostConfiguration\HS.CustomerApp.HostConfiguration.csproj", "{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{3B7C3D50-05E0-4FB8-8BED-C4378B06EFAA}.Release|x64.Build.0 = Release|Any CPU
 		{3B7C3D50-05E0-4FB8-8BED-C4378B06EFAA}.Release|x86.ActiveCfg = Release|Any CPU
 		{3B7C3D50-05E0-4FB8-8BED-C4378B06EFAA}.Release|x86.Build.0 = Release|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Debug|x64.Build.0 = Debug|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Debug|x86.Build.0 = Debug|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Release|x64.ActiveCfg = Release|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Release|x64.Build.0 = Release|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Release|x86.ActiveCfg = Release|Any CPU
+		{9EA8A55D-C425-4EF0-A298-6E46E9B1FFB7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
