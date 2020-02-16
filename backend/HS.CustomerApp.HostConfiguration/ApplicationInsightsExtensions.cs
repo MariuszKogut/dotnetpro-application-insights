@@ -19,9 +19,7 @@ namespace HS.CustomerApp.HostConfiguration
             services.AddApplicationInsightsTelemetry(o =>
             {
                 o.InstrumentationKey = instrumentationKey;
-                o.DeveloperMode = false;
                 o.RequestCollectionOptions.EnableW3CDistributedTracing = false;
-                o.RequestCollectionOptions.InjectResponseHeaders = true;
             });
 
             services.AddSingleton<ITelemetryInitializer>(new RoleNameInitializer(roleName, roleNameInstance));

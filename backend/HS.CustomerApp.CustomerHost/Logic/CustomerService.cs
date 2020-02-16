@@ -52,7 +52,7 @@ namespace HS.CustomerApp.CustomerHost.Logic
 
         public void Delete(long id)
         {
-            _logger.LogInformation($"Delete customer with id {id}");
+            _logger.LogInformation("Delete customer with id {id}", id);
             _data.RemoveAll(x => x.Id == id);
         }
 
