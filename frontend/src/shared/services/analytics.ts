@@ -16,7 +16,7 @@ const setupApplicationInsights = () => {
       disableFetchTracking: false,
       enableDebugExceptions: true,
       enableCorsCorrelation: true,
-      distributedTracingMode: DistributedTracingModes.AI
+      distributedTracingMode: DistributedTracingModes.W3C
     }
   });
   applicationInsights.loadAppInsights();

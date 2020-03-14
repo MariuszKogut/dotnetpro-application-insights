@@ -58,7 +58,7 @@ namespace HS.CustomerApp.CustomerHost.Controllers
 
         private void Track(string eventName, long id)
         {
-            _telemetryClient.TrackEvent(eventName, new Dictionary<string, string> {{"customer-id", id.ToString()}});
+            _telemetryClient.TrackEvent(eventName, new Dictionary<string, string> { { "customer-id", id.ToString() } });
         }
     }
 }
